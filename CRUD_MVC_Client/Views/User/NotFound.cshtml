@@ -1,0 +1,14 @@
+﻿@model int
+@{
+    ViewData["Title"] = "User Not Found";
+}
+
+<div class="alert alert-danger">
+  <h4>User Not Found</h4>
+  <hr/>
+  <p>User with ID = @Model  was not found</p>
+</div>
+<a asp-action="Index" class="btn btn-success">
+  Return to User list
+</a>
+
