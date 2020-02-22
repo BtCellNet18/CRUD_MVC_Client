@@ -1,8 +1,8 @@
 ﻿@model CrudApiClient.Models.CreateUserRequest
 @{
 	ViewData["Title"] = "Add";
+	bool isLoggedIn = Context.Session.TryGetValue("Token", out _);
 }
-
 <div class="container">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
@@ -30,7 +30,14 @@
 					<label asp-for="Password">Password</label>
 					<input asp-for="Password" type="password" class="form-control" placeholder="Password">
 				</div>
-				<a asp-action="Index" class="btn btn-light">Cancel</a>
+				@if (isLoggedIn)
+				{
+					<a asp-action="Index" class="btn btn-light">Cancel</a>
+				}
+				else
+				{
+					<a asp-controller="Home" asp-action="Index" class="btn btn-light">Cancel</a>
+				}
 				<button type="submit" class="btn btn-success">Create</button>
 			</form>
 		</div>

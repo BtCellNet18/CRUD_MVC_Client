@@ -5,7 +5,9 @@ $(document).ready(function () {
 
 });
 
-function confirmDelete(url) {
-  $('#frmDelete').attr('action', url);
+function showConfirm(title = 'Confirm', body = 'Are you sure?', url = '/') {
+  $('#frmConfirm').attr('action', url);
+  $('.modal-title').text(title);
+  $('.modal-body').text(body);
   $('.modal').modal('show');
 }

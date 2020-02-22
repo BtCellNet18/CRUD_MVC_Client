@@ -17,7 +17,6 @@ namespace CRUD_MVC_Client.Controllers
 		[HttpGet]
 		public IActionResult Login()
 		{
-			this.ClearSession();
 			return View();
 		}
 
@@ -36,6 +35,7 @@ namespace CRUD_MVC_Client.Controllers
 			return View(model);
 		}
 
+		[HttpPost]
 		public IActionResult Logout()
 		{
 			this.ClearSession();

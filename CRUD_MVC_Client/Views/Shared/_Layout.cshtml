@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
 	bool isLoggedIn = Context.Session.TryGetValue("Token", out _);
 }
 <!DOCTYPE html>
@@ -14,42 +14,55 @@
 	<header>
 		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
 			<div class="container">
-				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MVC</a>
+				<a class="navbar-brand" href="https://docs.microsoft.com/en-gb/aspnet/core/mvc/">MVC</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 								data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
 								aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-					<ul class="navbar-nav flex-grow-1">
+					<div class="navbar-nav flex-grow-1">
+						<a class="btn btn-default" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
 
 						@if (isLoggedIn)
 						{
-							<li class="nav-item">
-								<a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Users</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
-							</li>
-							<li class="nav-item">
-								<div class="nav-link text-dark">@Context.Session.GetString("Username")</div>
-							</li>
+							<a class="btn btn-default" asp-area="" asp-controller="User" asp-action="Index">Users</a>
+							<div class="spacer"></div>
+							var url = Url.Action("Logout", "Account");
+							<button class="btn btn-default" onclick="showConfirm('Logout', 'Are you sure?', '@url')">Logout</button>
 						}
 						else
 						{
-							<li class="nav-item">
-								<a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Add">Register</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-							</li>
+							<a class="btn btn-default" asp-area="" asp-controller="User" asp-action="Add">Register</a>
+							<div class="spacer"></div>
+							<a class="btn btn-default" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
 						}
 
-					</ul>
+					</div>
 				</div>
 			</div>
 		</nav>
 	</header>
+
+	<div class="modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title"></h4>
+					<button type="button" class="close" data-dismiss="modal">x</button>
+				</div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer">
+					<form id="frmConfirm" method="post">
+						<button class="btn btn-light" data-dismiss="modal">No</button>
+						<button type="submit" class="btn btn-primary">Yes</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="container">
 		<main role="main" class="pb-3">
 			@RenderBody()
